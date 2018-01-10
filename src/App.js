@@ -1,18 +1,44 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Quotes from './Quotes.js';
+import getQuotes from './services/quotes.js';
 
 class App extends Component {
+  constructor() {
+    super();
+    console.log('constructor');
+    this.state = {};
+  }
+
+  componentDidMount() {
+    const defaultQuotes = [
+      { name: 'default - a'},
+      { name: 'default - b'},
+    ];
+    return getQuotes()
+      .then(response => {
+        console.log('getQuotes', response);
+        if (response.quotes) {
+          this.setState({
+            quotes: response.quotes,
+          });
+        } else {
+          this.setState({
+            quotes: defaultQuotes
+          });
+        }
+      });
+  }
+
   render() {
+    if (!this.state.quotes) {
+      return null;
+    }
+
+    console.log('App render', this.state.quotes);
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Quotes quotes={this.state.quotes}></Quotes>
       </div>
     );
   }
