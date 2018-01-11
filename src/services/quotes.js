@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const apiPrefix = 'https://sodimac-quotes-api.azurewebsites.net'
+// const apiPrefix = 'https://sodimac-quotes-api.azurewebsites.net'
+const apiPrefix = 'http://solerthekong.cloudapp.net:8000'
 const code = 'KMuoX5FjRO9m/ViWxjC3eDAGR6EijHLtGswioGnQalFQBV38mhyyWQ=='
 
 const getQuotes = () => {
